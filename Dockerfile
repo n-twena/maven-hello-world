@@ -7,4 +7,4 @@ RUN mvn -B package
 
 FROM ubuntu:latest
 WORKDIR /home
-COPY --from=builder src/target/*.jar .
+COPY --from=builder target/*.jar .

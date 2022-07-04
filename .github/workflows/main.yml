@@ -36,8 +36,17 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2   
-      - name: Build image
+      - name: MultiStage Build
         run: docker build -t hello:latest .
+      - name: Push image to DockerHub 
+        env:
+          USERNAME: ${{ secrets.username }}
+          PASSWORD: ${{ secrets.password }}
+          REGISTRY: ${{ secrets.dockerhub }}
+        run: |
+          docker login -u "$USERNAME" -p "$PASSWORD"
+          docker tag hello "$USERNAME"/hello
+          docker push "$USERNAME"/hello
 #       - name: Compile the Project
 #         working-directory: my-app
 #         run: mvn -B compile

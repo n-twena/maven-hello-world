@@ -15,22 +15,31 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  compile:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        java: [ 8 ]
+    name: Java ${{ matrix.java }} compile
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: compile
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-package: jdk
+          java-version: ${{ matrix.java }}
+      - name: Cache the Maven packages to speed up build
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2   
+      - name: Compile the Project
+        working-directory: my-app
         run: |
           cd my-app
-          mvn compile
-        
-        # Runs a single command using the runners shell
-      - name: package
-        run: mvn package
+          mvn -B compile
+      - name: Build and test project with Maven
+        run: mvn -B package

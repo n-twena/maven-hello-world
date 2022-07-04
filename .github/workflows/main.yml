@@ -27,14 +27,10 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: compile
-        run: mvn compile
+        run: |
+          cd my-app,
+          mvn compile
         
         # Runs a single command using the runners shell
       - name: package
         run: mvn package
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.

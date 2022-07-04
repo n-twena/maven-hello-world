@@ -38,8 +38,6 @@ jobs:
           restore-keys: ${{ runner.os }}-m2   
       - name: Compile the Project
         working-directory: my-app
-        run: |
-          cd my-app
-          mvn -B compile
-      - name: Build and test project with Maven
-        run: mvn -B package
+        run: mvn -B compile
+#       - name: Build and test project with Maven
+#         run: mvn -B package

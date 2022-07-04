@@ -1,4 +1,4 @@
-FROM maven:3.5.4-jdk-8-alpine AS build
+FROM maven:3.5.4-jdk-8-alpine AS builder
 WORKDIR /home
 COPY my-app/src /home
 COPY my-app/pom.xml /home

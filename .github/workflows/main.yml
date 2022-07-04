@@ -37,7 +37,6 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2   
       - name: Build image
-        working-directory: maven-hello-world
         run: docker build -t hello:latest .
 #       - name: Compile the Project
 #         working-directory: my-app

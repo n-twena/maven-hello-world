@@ -36,9 +36,16 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2   
-      - name: Compile the Project
-        working-directory: my-app
-        run: mvn -B compile
-      - name: Build and test project with Maven
-        working-directory: my-app
-        run: mvn -B package
+      - name: Build image
+        working-directory: maven-hello-world
+        run: docker build -t hello:latest .
+#       - name: Compile the Project
+#         working-directory: my-app
+#         run: mvn -B compile
+#       - name: Build and test project with Maven
+#         working-directory: my-app
+#         run: mvn -B package
+#       - name: Build image
+#         working-directory: maven-hello-world
+#         run: docker build -t hello:latest .
+

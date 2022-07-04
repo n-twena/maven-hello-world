@@ -28,7 +28,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: compile
         run: |
-          cd my-app,
+          cd my-app
           mvn compile
         
         # Runs a single command using the runners shell

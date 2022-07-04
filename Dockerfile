@@ -7,5 +7,5 @@ RUN mvn -B package
 
 FROM ubuntu:latest
 WORKDIR /home
-COPY --from=builder target/my-app-1.0.0-SNAPSHOT.jar .
+COPY --from=builder target/my-app-1.0.0-SNAPSHOT.jar /home
 CMD exec java -jar my-app-1.0.0-SNAPSHOT.jar

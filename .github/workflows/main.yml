@@ -36,7 +36,7 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2   
-      - name: MultiStage Build Image
+      - name: MultiStage Build Image for build test and package
         run: docker build -t hello:latest .
       - name: Push image to DockerHub 
         env:
@@ -47,13 +47,4 @@ jobs:
           docker login -u "$USERNAME" -p "$PASSWORD"
           docker tag hello "$USERNAME"/hello
           docker push "$USERNAME"/hello
-#       - name: Compile the Project
-#         working-directory: my-app
-#         run: mvn -B compile
-#       - name: Build and test project with Maven
-#         working-directory: my-app
-#         run: mvn -B package
-#       - name: Build image 
-#         working-directory: maven-hello-world
-#         run: docker build -t hello:latest .
 

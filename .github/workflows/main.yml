@@ -30,7 +30,7 @@ jobs:
       - name: MultiStage Build Image for build test and package
         env:
           USERNAME: ${{ secrets.username }}
-        run: docker build . --file Dockerfile --build-arg version=${{ env.VERSION }} --build-arg fullname=${{ env.FULLNAME }} --tag "$USERNAME"/my-app:${{ env.VERSION }}
+        run: docker build . --file Dockerfile --build-arg version=${{ env.VERSION }} --build-arg fullname=${{ env.FULLNAME }} --tag noamtwe/my-app:${{ env.VERSION }}
       - name: Push image to DockerHub 
         env:
           USERNAME: ${{ secrets.username }}

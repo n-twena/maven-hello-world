@@ -17,10 +17,6 @@ on:
 jobs:
   compile:
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        java: [ 8 ]
-    name: Java ${{ matrix.java }} compile
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v2

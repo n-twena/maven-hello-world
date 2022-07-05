@@ -21,6 +21,8 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v2
       - name: Versioning
+        env:
+          USERNAME: ${{ secrets.username }}
         run: |
           mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit
           echo VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV

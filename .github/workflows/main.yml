@@ -27,7 +27,7 @@ jobs:
           echo ARTIFACT=$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.artifactId -q -DforceStdout) >> $GITHUB_ENV
           echo FULLNAME="${{ env.ARTIFACT }}-${{ env.VERSION }}" >> $GITHUB_ENV
       - name: MultiStage Build Image for build test and package
-        run: docker build . --file Dockerfile --build-arg version=${{ env.VERSION }} --build-arg fullname=${{ env.FULLNAME }} --tag $USERNAME"/my-app:${{ env.VERSION }}
+        run: docker build . --file Dockerfile --build-arg version=${{ env.VERSION }} --build-arg fullname=${{ env.FULLNAME }} --tag "$USERNAME"/my-app:${{ env.VERSION }}
       - name: Push image to DockerHub 
         env:
           USERNAME: ${{ secrets.username }}

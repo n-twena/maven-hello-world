@@ -26,6 +26,7 @@ jobs:
           echo VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
           echo ARTIFACT=$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.artifactId -q -DforceStdout) >> $GITHUB_ENV
           echo FULLNAME="${{ env.ARTIFACT }}-${{ env.VERSION }}" >> $GITHUB_ENV
+          echo ${{ env.FULLNAME }}
       - name: MultiStage Build Image for build test and package
         env:
           USERNAME: ${{ secrets.username }}

@@ -6,7 +6,8 @@ RUN mvn versions:set -DnewVersion=1.0.1-SNAPSHOT
 RUN mvn -B compile
 RUN mvn -B package
 
-FROM ubuntu:latest
+FROM openjdk:8-jdk-alpine
 WORKDIR /home
-COPY --from=builder /home/target/my-app-1.0.1-SNAPSHOT.jar my-app-1.0.1-SNAPSHOT.jar
-CMD java -jar my-app-1.0.1-SNAPSHOT.jar
+ARG fullname
+COPY --from=builder /home/target/${fullname}.jar ${fullname}.jar
+CMD java -jar ${fullname}.jar

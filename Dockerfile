@@ -8,4 +8,5 @@ FROM openjdk:8-jdk-alpine
 WORKDIR /home
 ARG fullname
 COPY --from=builder /home/target/${fullname}.jar ${fullname}.jar
-CMD java -jar ${fullname}.jar
+ENV app="${fullname}.jar"
+CMD java -jar ${app}
